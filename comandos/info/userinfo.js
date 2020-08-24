@@ -43,7 +43,7 @@ module.exports = class UserinfoCommand extends Command {
         embed.addField("❯ Nickname", `${usario.nickname ? usario.nickname : "No Nickname!"}`)
         embed.addField("❯ Status", `${status[usario.presence.status]}`, true) 
         embed.addField("❯ Activity", usario.presence.activities[0] || `None`, true)
-        embed.addField("❯ User Flags", "" + usario.flags.toArray().join(", ") || `No badge`, true) 
+        embed.addField("❯ User Flags", "" + usario.flags.toArray().join(", ") || `None`, true) 
         embed.addField("❯ Roles", `<@&${message.guild.member(usario)._roles.join('> <@&')}>` || `**-**`, true)
         embed.addField("❯ Joined Discord At", `${usario.createdAt.toUTCString().substr(0, 16)}`, true) 
         embed.setFooter(`Requested by ${message.author.tag} `, `${message.author.avatarURL()}`)
