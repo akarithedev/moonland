@@ -48,16 +48,19 @@ Structures.extend('Guild', Guild => {
   }
   return MusicGuild;
 });
+function newprefix(message) { 
+  
+  } 
 
-const Commando = require('discord.js-commando');
+const Commando = require('discord.js-commando'); 
 const bot = new Commando.Client({ 
   commandPrefix: prefix,
-  owner: ['662979119713353729', '557112105275228161'],
+  owner: ['662979119713353729', '671449036494077967'],
   unknownCommandResponse: false,
   commandError: false
 });
 
-bot.registry
+  bot.registry
   .registerDefaultTypes()
   .registerGroups([['music', 'Music']])
   .registerGroups([['other', 'Other']])
@@ -79,7 +82,16 @@ bot.registry
     help: false,
     unknownCommand: false
   })
-  .registerCommandsIn(path.join(__dirname, 'comandos'));
+  .registerCommandsIn(path.join(__dirname, 'comandos')); 
+function Blacklisted(blacklistedUsers) {
+bot.dispatcher.addInhibitor(async msg => { 
+  let blacklist = await db.fetch(`blacklist_${msg.author.id}`);  
+  if(blacklist === "Blacklisted") {
+    if(blacklistedUsers.has(blacklist)) return msg.reply('You are blacklisted from the bot!');
+	 }
+    
+  }); 
+} 
 
 bot.commands = new Collection();
 bot.aliases = new Collection();

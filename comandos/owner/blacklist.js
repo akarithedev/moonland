@@ -17,13 +17,15 @@ module.exports = class blacklistCommand extends Command {
   async run(message, args) { 
     const user = message.mentions.users.first()
     if (!user) return message.reply("Please mention someone!")
-    
+    if(user.id == message.author.id) { 
+      return message.say("I can't blacklist my creators")
+     }
     let blacklist = await db.fetch(`blacklist_${user.id}`)
     
     if (blacklist === "Not") {
       db.set(`blacklist_${user.id}`, "Blacklisted") 
       let embed = new Discord.MessageEmbed()
-      .setDescription(`The user **__${user}__** has been blacklisted!`)
+      .setDescription(`${user} has been blacklisted!`)
       .setColor("RED") 
       .setTimestamp() 
       .setFooter(`Blacklisted by ${message.author.username}`)

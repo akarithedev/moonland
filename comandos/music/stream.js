@@ -32,7 +32,9 @@ module.exports = class streamCommand extends Command {
       } 
 
  
-
+if(!args.length) { 
+  return message.say("Please provide a stream link")
+  }
 const channel = this.client.channels.cache.get(voiceChannel.id);
   channel.join().then(connection => {
 

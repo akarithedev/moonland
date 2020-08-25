@@ -18,24 +18,26 @@ module.exports = class PlayCommand extends Command {
       throttling: {
         usages: 2,
         duration: 5
-      },
-      args: [
-        {
-          key: 'query',
-          prompt: '¿Qué canción o lista de reproducción quieres escuchar?',
-          type: 'string',
-          validate: query => query.length > 0 && query.length < 200
-        }
-      ]
+      }, 
+      args: [{ 
+        key: "query",
+        prompt: "What song or playlist do you want to listen?", 
+        type: "string", 
+        default: "", 
+        validate: query => query.length > 0 && query.length < 200 
+        }]
+   
     });
   }
 
-  async run(message, { query }) {
-    // initial checking
-    var voiceChannel = message.member.voice.channel;
+  async run(message, { query }) { 
+   // initial checking
+    var voiceChannel = message.member.voice.channel; 
     if (!voiceChannel)
       return message.say('Únase a un canal de voz e intente nuevamente');
-    // end initial check
+    // end initial check 
+    if(!query) 
+      return message.channel.send("Wrong usage. Try `ml!play <text> or <url>`");
     if (message.guild.triviaData.isTriviaRunning == true)
       return message.say('Please try after the trivia has ended');
     // This if statement checks if the user entered a youtube playlist url

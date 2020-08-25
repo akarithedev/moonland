@@ -28,7 +28,7 @@ module.exports = class HelpCommand extends Command {
     embed.addField("❯ Info","`ping`, `userinfo`, `serverinfo`, `uptime`")
     embed.addField("❯ Other", "`invite`, `stats`, `avatar`, `say`, `suggestion`") 
     embed.addField("❯ Music", "`play`, `leave`, `pause`, `resume`, `skip`, `queue`, `volume`, `join`, `stream`") 
-    embed.setFooter('Made with ❤️ by Maria Queen and her boyfriend', `https://cdn.discordapp.com/avatars/662979119713353729/323344199cd695407089e5edca8a9c79.png?size=2048`);
+    embed.setFooter('Made with ❤️ by Maria2020', `https://cdn.discordapp.com/avatars/662979119713353729/bcd894e42c0a58f409eaaf0cb6e2f0bc.png?size=2048`);
     embed.setColor("#B30AB6")  
     embed.setTimestamp()
     return message.channel.send(embed) 

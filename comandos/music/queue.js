@@ -23,15 +23,13 @@ module.exports = class QueueCommand extends Command {
       titleArray.push(obj.title);
     });
     var queueEmbed = new MessageEmbed()
-      .setColor('AQUA') 
-      .setAuthor(`Music Queue`, `${message.guild.iconURL()}`) 
-      .setTimestamp() 
-      .setFooter(`Requested by ${message.author.tag}`)
+      .setColor('AQUA')
+      .setAuthor(`Music Queue`, `${message.guild.iconURL()}`)
+      .setTimestamp()
+      .setFooter(`Requested by ${message.author.tag}`);
     for (let i = 0; i < titleArray.length; i++) {
       queueEmbed.addField(`${i + 1}: ${titleArray[i]}`, `\u200b`);
     }
     return message.say(queueEmbed);
   }
 };
-
-

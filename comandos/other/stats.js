@@ -17,10 +17,10 @@ module.exports = class StatsCommand extends Command {
     embed.setThumbnail(message.client.user.avatarURL());
     embed.setAuthor('MoonLand 1.20.5');
     embed.setDescription('');
-    embed.addField('Author', `Ana Maria & Priyanshu Debnath`);
+    embed.addField('Author', `Ana Maria & Eduard`);
     embed.addField('BOT ID', message.client.user.id);
-    embed.addField('Owners', '<@662979119713353729>\n<@557112105275228161>');
-    embed.addField('Owner IDs', `662979119713353729\n557112105275228161`);
+    embed.addField('Owners', '<@662979119713353729>\n<@671449036494077967>');
+    embed.addField('Owner IDs', `662979119713353729\n671449036494077967`);
     embed.addField('Default Prefix', 'ml!');
     embed.addField(
       'Music playing in',

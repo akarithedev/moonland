@@ -9,7 +9,7 @@
     "discord.js-commando": "github:discordjs/Commando",
     "ffmpeg-static": "^4.2.7",
     "iso-639-1": "^2.1.2",
-    "ytdl-core": "^3.2.1",
+    "ytdl-core": "^3.2.2",
     "simple-youtube-api": "^5.2.1",
     "ws": "^7.3.1",
     "common-tags": "^1.8.0",
@@ -20,13 +20,12 @@
     "opusscript": "^0.0.7",
     "bindings": "^1.5.0",
     "fs": "^0.0.2",
-    "parse-ms": "^2.0.0",
-    "twemoji-parser": "^13.0.0",
     "youtube-notification": "^1.1.0",
     "moment": "^2.27.0",
-    "moment-duration-format": "^2.2.2",
+    "moment-duration-format": "^2.3.2",
     "ascii-table": "^0.0.9",
-    "quick.db": "^7.1.1"
+    "quick.db": "^7.1.1",
+    "parse-ms": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
