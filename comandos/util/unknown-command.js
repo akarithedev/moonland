@@ -1,6 +1,8 @@
 const { Command } = require('discord.js-commando')
-const Discord = require('discord.js')
-const { prefix } = require("../../config.json")
+const Discord = require('discord.js') 
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority");
+const { default_prefix } = require("../../config.json")
 module.exports = class UnknownCommandCommand extends Command {
  constructor(client) {
   super(client, { 
@@ -15,10 +17,12 @@ module.exports = class UnknownCommandCommand extends Command {
   }
     )} 
   
-  run(message, client) { 
-    
+  async run(message, client) { 
+    let prefix = await db.fetch(`prefix_${message.guild.id}`); 
+  if(prefix === null) prefix = default_prefix; 
+   
     const embed = new Discord.MessageEmbed() 
-      .setAuthor("MoonLand Bot Help", `${message.client.user.avatarURL()}`)  
+      .setAuthor("MoonLand Bot Help", `${this.client.user.avatarURL()}`)  
       .setTitle("Invalid Command.")
       .setDescription(`Do \`${prefix}help\` for the list of the commands.`)
       .setTimestamp() 

@@ -1,5 +1,8 @@
 const Discord = require("discord.js") 
-const db = require("quick.db") 
+const { Database } = require("quickmongo");
+const db = new Database(
+  "mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority"
+);
 const ms = require("parse-ms")
 const { Command } = require("discord.js-commando") 
 module.exports = class WorkCommand extends Command {
@@ -23,7 +26,6 @@ module.exports = class WorkCommand extends Command {
         let time = ms(timeout - (Date.now() - author));
     
         let timeEmbed = new Discord.MessageEmbed()
-        
         .setColor("RED")     
         .setTimestamp()    
         .setAuthor("Timeout")
@@ -37,13 +39,15 @@ module.exports = class WorkCommand extends Command {
         let amount = Math.floor(Math.random() * 500) + 1;
         let embed1 = new Discord.MessageEmbed()
         .setColor("GREEN")
-        .setDescription(`:white_check_mark: **You worked as a ${replies[result]} and earned ${amount} coins**`)
+        .setDescription(`\✅ **You worked as a ${replies[result]} and earned ${amount} coins**`)
         .setTimestamp()
-        .setAuthor("Work Command");
+        .setAuthor(user.username);
         message.channel.send(embed1)
-        
+        const test = Date.now();
+     
         db.add(`credits_${message.guild.id}_${user.id}`, amount)
-        db.set(`work_${message.guild.id}_${user.id}`, Date.now())
+        db.set(`work_${message.guild.id}_${user.id}`, test)
+           
     };  
  }
 }

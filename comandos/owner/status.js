@@ -1,7 +1,9 @@
 const { Command } = require('discord.js-commando')
-const Discord = require('discord.js') 
-const db = require('quick.db') 
-const { prefix } = require("../../config.json")
+const Discord = require('discord.js')  
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority");
+
+
 module.exports = class StatusCommand extends Command {
     constructor(client) {
         super(client, {
@@ -19,15 +21,17 @@ module.exports = class StatusCommand extends Command {
   
      async run(message) { 
           const args = message.content.split(' ').slice(1);
-       //ARGUMENT
-          if(!args.length) {
+       //ARGUMENT 
+       const statusname = args.join(" "); 
+          if(!statusname) {
               return message.channel.send("Please give a name for status")
             }
 
-db.set(`status`, args.join(" ")).then
- await message.channel.send(`Status has been changed to \`${args.join(" ")}\``)
+ db.set("status", statusname).then
+ await message.channel.send(`Status has been changed to \`${statusname}\``)
     process.exit(1);
             //ONLY BOT OWNER
-            
+        
+
   }
    };

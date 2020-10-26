@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const { Command } = require('discord.js-commando');
-
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority"); 
+const { default_prefix } = require("../../config.json")
 module.exports = class StatsCommand extends Command {
   constructor(client) {
     super(client, {
@@ -12,25 +14,28 @@ module.exports = class StatsCommand extends Command {
     });
   }
 
-  run(message, client) {
+  async run(message) { 
+    let prefix = await db.get(`prefix_${message.guild.id}`);
+  if (prefix === null) prefix = default_prefix; 
+    
     const embed = new Discord.MessageEmbed();
-    embed.setThumbnail(message.client.user.avatarURL());
+    embed.setThumbnail(this.client.user.avatarURL());
     embed.setAuthor('MoonLand 1.20.5');
     embed.setDescription('');
-    embed.addField('Author', `Ana Maria & Eduard`);
-    embed.addField('BOT ID', message.client.user.id);
-    embed.addField('Owners', '<@662979119713353729>\n<@671449036494077967>');
-    embed.addField('Owner IDs', `662979119713353729\n671449036494077967`);
+    embed.addField('Author', `Ana Maria & Priyanshu`);
+    embed.addField('BOT ID', this.client.user.id);
+    embed.addField('Owners', '<@764817986968092712>\n<@557112105275228161>');
+    embed.addField('Owner IDs', `764817986968092712\n557112105275228161`);
     embed.addField('Default Prefix', 'ml!');
     embed.addField(
       'Music playing in',
-      `${message.client.voice.connections.size} Servers`
+      `${this.client.voice.connections.size} Servers`
     );
     embed.addField(
       'Bot Count',
-      `${message.client.guilds.cache.size} Servers 
-${message.client.users.cache.size} Members 
-${message.client.channels.cache.size} Channels`
+      `${this.client.guilds.cache.size} Servers 
+${this.client.users.cache.size} Members 
+${this.client.channels.cache.size} Channels`
     );
     embed.addField('Library', 'Discord.js v12.2.0');
     embed

@@ -16,11 +16,11 @@ module.exports = class tempbanCommand extends Command {
     }; 
   
   async run(message) { 
-    const args = message.content.slice(prefix.length).trim().split(/ +/g); 
+    const args = message.content.split(" "); 
     
-    const reason = args.splice(3).join(" ");
+    const reason = args.slice(3).join(" ");
 		const tbuser = message.mentions.members.first();
-		const regex = args.splice(2).join(" ");
+		const regex = args.slice(2).join(" ");
 
 
 

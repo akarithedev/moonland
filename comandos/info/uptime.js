@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js")
 const { Command } = require("discord.js-commando") 
-
 module.exports = class uptimeCommand extends Command { 
   constructor(client) { 
     super(client, { 
@@ -15,14 +14,17 @@ module.exports = class uptimeCommand extends Command {
 
   async run(message, args) { 
     
-  const moment = require("moment");
-require("moment-duration-format");
-
-const duration = moment.duration(this.client.uptime).format(" d [days], h [hours], m [minutes], s [seconds]");
-
+  function duration(ms) {
+        const sec = Math.floor((ms / 1000) % 60).toString()
+        const min = Math.floor((ms / (1000 * 60)) % 60).toString()
+        const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString()
+        const days = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString()
+        return `${days.padStart(1, '0')} days, ${hrs.padStart(2, '0')} hours, ${min.padStart(2, '0')} minutes, ${sec.padStart(2, '0')} seconds`
+    } 
+    
 const embed = new MessageEmbed() 
 .setTitle("I Have Been Online For:") 
-.setDescription(`\`${duration}\``) 
+.setDescription(`\`${duration(this.client.uptime)}\``) 
 .setColor("GREEN") 
 message.channel.send(embed)
     }

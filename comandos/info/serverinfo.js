@@ -32,7 +32,27 @@ module.exports = class serverinfoCommand extends Command {
         "russia": ":flag_ru: Russia",
         "southafrica": ":flag_za:  South Africa"
     } 
-    
+    const bot = this.client; 
+    let Emojis = "";
+        let EmojisAnimated = "";
+        let EmojiCount = 0;
+        let Animated = 0;
+        let OverallEmojis = 0;
+        function Emoji(id){
+            return bot.emojis.cache.get(id).toString()
+        }
+        message.guild.emojis.cache.forEach(emoji => {
+            OverallEmojis++;
+            if(emoji.animated) {
+                Animated++;
+                EmojisAnimated+=Emoji(emoji.id)
+            }else {
+                EmojiCount++;
+                Emojis+=Emoji(emoji.id)
+            }
+        }) 
+
+  
    const embed = new MessageEmbed() 
    .addField("❯ Server Name", `${message.guild.name}`, true) 
    .addField("❯ Server ID", message.guild.id, true) 
@@ -44,7 +64,7 @@ module.exports = class serverinfoCommand extends Command {
    .addField("❯ Role Count", `Total Roles: [\`${message.guild.roles.cache.size}\`]`, true) 
    .addField("❯ Emoji Count", `Total Emojis: [\`${message.guild.emojis.cache.size}\`]`) 
    .addField("❯ Boost Count", `Total Boosts: [\`${message.guild.premiumSubscriptionCount}\`]`) 
-   .addField("❯ Created At", `${message.channel.guild.createdAt.toUTCString().substr(0, 16)}`)
+   .addField("❯ Created At", `${message.channel.guild.createdAt.toDateString().substr(0, 16)}`)
    .addField("❯ Presence", [
         `**Online:** ${
           message.guild.members.cache.filter(member => member.presence.status === "online").size
@@ -59,7 +79,8 @@ module.exports = class serverinfoCommand extends Command {
           message.guild.members.cache.filter(member => member.presence.status === "offline").size
         }`,
       
-      ])
+      ]) 
+   
    .setThumbnail(message.guild.iconURL({dynamic: true}), true) 
    .setColor("#ff2025")
    message.channel.send(embed)

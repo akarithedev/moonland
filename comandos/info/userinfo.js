@@ -28,7 +28,7 @@ module.exports = class UserinfoCommand extends Command {
         online: "Online",
         idle: "Idle",
         dnd: "Do Not Disturb",
-        offline: "Offline/Invisible"
+        offline: "Offline"
       } 
       
       const embed = new Discord.MessageEmbed()
@@ -39,13 +39,13 @@ module.exports = class UserinfoCommand extends Command {
         embed.addField("❯ Full Username", `${usario.username}#${usario.discriminator}`, true)
         embed.addField("❯ ID", `${usario.id}`, true) 
         embed.addField("❯ BOT", usario.bot || `false`, true)
-        embed.addField("❯ Nickname", `${usario.nickname ? usario.nickname : "No Nickname!"}`)
+        embed.addField("❯ Nickname", message.guild.member(usario.id).nickname || `No nickname`, true)
         embed.addField("❯ Status", `${status[usario.presence.status]}`, true) 
         embed.addField("❯ Activity", usario.presence.activities[0]|| `None`, true)
         embed.addField("❯ User Flags", "" + usario.flags.toArray().join(", ") || `None`, true) 
         embed.addField("❯ Roles", message.guild.member(usario).roles.cache.map(r => r) || `None`, true)
         embed.addField("❯ Joined Discord At", `${usario.createdAt.toUTCString().substr(0, 16)}`, true) 
-        embed.setFooter(`Requested by ${message.author.tag} `, `${message.author.avatarURL()}`)
+        embed.setFooter(`Requested by ${message.author.tag} `, `${message.author.displayAvatarURL({dynamic: true})}`)
         embed.setTimestamp(Date.now())
 
     message.channel.send(embed);

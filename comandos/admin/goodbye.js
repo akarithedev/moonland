@@ -1,6 +1,7 @@
 const Discord = require("discord.js") 
-const db = require("quick.db") 
 const { Command } = require("discord.js-commando") 
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority");
 
 module.exports = class goodbyeCommand extends Command { 
   constructor(client) { 
@@ -29,9 +30,10 @@ module.exports = class goodbyeCommand extends Command {
       .setColor("RED") 
       .setTimestamp()
       return message.channel.send(usageEmbed)
-    } 
+    }   
+    const channelid = channel.id;
     
-    db.set(`goodbye_${message.guild.id}`, channel.id).then
+    db.set(`goodbye_${message.guild.id}`, channelid).then
       const gbChannel = new Discord.MessageEmbed() 
       .setTitle("GoodBye System") 
       .setDescription(`GoodBye Channel has been set to ${channel}`) 

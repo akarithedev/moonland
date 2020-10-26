@@ -34,7 +34,10 @@ module.exports = class streamCommand extends Command {
  
 if(!args.length) { 
   return message.say("Please provide a stream link")
-  }
+  } 
+  if(args.join("") === "https://youtube.com/" || "https://www.youtube.com/") { 
+    return message.say("Not available")
+    }
 const channel = this.client.channels.cache.get(voiceChannel.id);
   channel.join().then(connection => {
 

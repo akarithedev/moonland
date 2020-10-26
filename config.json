@@ -1,7 +1,7 @@
 {
-  "prefix": "ml!", 
+  "default_prefix": "ml!", 
   "OWNER_ID": ["662979119713353729", "702597033579774002"],
   "CHANNEL_ID": ["UCZVpGbAsS-uW-kDrvjnXywQ", "UC7T1cteDrJYoPv4g6S5c-Aw", "UCZVpGbAsS-uW-kDrvjnXywQ", "UCIDpLOzouR-rUlyfKwFdz6A"], 
   "SERVER_CHANNEL_ID": ["732636604006662285", "732481020309405756", "738023160108286064"],
-  "youtubeAPI": "AIzaSyAq9owldbGDWPIILLqbS8hDmytNBG0USM4"
+  "youtubeAPI": "AIzaSyD0bq3jRMuZ3xisER4AaPulmF8G2UNFWl4"
 }

@@ -18,7 +18,7 @@ module.exports = class AvatarCommand extends Command {
         const embed = new Discord.MessageEmbed() 
         embed.setTitle("") 
         embed.setAuthor(`${usario.username}`)
-        embed.setImage(usario.avatarURL({ format: 'png', dynamic: true, size: 2048 }));
+        embed.setImage(usario.displayAvatarURL({ format: 'png', dynamic: true, size: 2048 }));
         embed.setColor("#00b4ff") 
         
         message.channel.send(embed);

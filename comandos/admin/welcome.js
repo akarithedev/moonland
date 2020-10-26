@@ -1,5 +1,8 @@
 const Discord = require("discord.js") 
-const db = require("quick.db") 
+const { Database } = require("quickmongo");
+const db = new Database(
+  "mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority"
+); 
 const { Command } = require("discord.js-commando") 
 
 module.exports = class welcomeCommand extends Command { 
@@ -29,8 +32,9 @@ module.exports = class welcomeCommand extends Command {
       .setTimestamp()
       return message.channel.send(usageEmbed)
     } 
+    const channelid = channel.id;
     
-    db.set(`welchannel_${message.guild.id}`, channel.id).then
+    db.set(`welchannel_${message.guild.id}`, channelid).then
       const welChannel = new Discord.MessageEmbed() 
       .setTitle("Welcome System") 
       .setDescription(`Welcome channel has been set to ${channel}`) 

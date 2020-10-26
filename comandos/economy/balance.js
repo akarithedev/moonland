@@ -1,5 +1,8 @@
 const Discord = require("discord.js") 
-const db = require("quick.db") 
+const { Database } = require("quickmongo");
+const db = new Database(
+  "mongodb+srv://maria:maria123@cluster1.bvusk.mongodb.net/moonland?retryWrites=true&w=majority"
+);
 const ms = require("parse-ms")
 const { Command } = require("discord.js-commando") 
 module.exports = class BalanceCommand extends Command {
@@ -17,7 +20,7 @@ module.exports = class BalanceCommand extends Command {
  async run(message, client, args) { 
    let user = message.mentions.members.first() || message.author;
 
-  let bal = db.fetch(`credits_${message.guild.id}_${user.id}`)
+  let bal = await db.fetch(`credits_${message.guild.id}_${user.id}`)
 
   if (bal === null) bal = 0;
 

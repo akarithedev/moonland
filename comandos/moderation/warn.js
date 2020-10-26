@@ -38,20 +38,21 @@ module.exports = class WarnCommand extends Command {
 
       } 
 
-      if(message.content.includes(`${message.author}`)) { 
+      if(user === message.author) { 
         return message.say("You can't warn yourself -_-")
 
-        }
-
-       
-    
+        } 
+    const razon = message.content.split(" ").slice(2).join(" "); 
+    if(!razon) { 
+      return razon = "No reason"; 
+      }
     
   
     if(message.member.hasPermission("ADMINISTRATOR")) { 
       
     const warnEmbed = new MessageEmbed() 
     .setTitle("Punishment System") 
-    .setDescription(`**${user.username}** Has been warned`) 
+    .setDescription(`**${user.username}** Has been warned | Reason: ***${razon}***`) 
     .setColor("BLUE") 
     .setTimestamp()
     .setFooter(`Warned by: ${message.author.username}`) 

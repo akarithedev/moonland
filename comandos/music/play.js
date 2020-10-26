@@ -37,7 +37,12 @@ module.exports = class PlayCommand extends Command {
       return message.say('Únase a un canal de voz e intente nuevamente');
     // end initial check 
     if(!query) 
-      return message.channel.send("Wrong usage. Try `ml!play <text> or <url>`");
+      return message.channel.send("Wrong usage. Try `ml!play <text> or <url>`"); 
+    //Proxy Example to avoid 429 error
+
+
+
+ 
     if (message.guild.triviaData.isTriviaRunning == true)
       return message.say('Please try after the trivia has ended');
     // This if statement checks if the user entered a youtube playlist url
@@ -64,7 +69,15 @@ module.exports = class PlayCommand extends Command {
             duration,
             thumbnail,
             voiceChannel
-          };
+          }; 
+          const https = require('https-proxy-agent');
+const proxy = 'http://133.196.223.157:8080'; //http://user:pass@123.123.123.123:8080 - Remove user:pass if your proxy doesn't require a authentication.
+const agent = https(proxy);
+ytdl(url, {
+
+requestOptions: { agent }
+
+});
           // this can be uncommented if you choose to limit the queue
           // if (message.guild.musicData.queue.length < 400) {
           //
@@ -155,7 +168,7 @@ module.exports = class PlayCommand extends Command {
       } catch (err) {
         console.error(err);
         return message.say(
-          ':warning: algo no salió bien por favor intente nuevamente más tarde'
+          `\`${err}\``
         );
       }
     }
@@ -173,8 +186,7 @@ module.exports = class PlayCommand extends Command {
         .setColor('#f987b')
         .setAuthor(
           `Song Selection.`,
-          `${message.author.avatarURL({
-            format: 'png',
+          `${message.author.displayAvatarURL({
             dynamic: true,
             size: 2048
           })}`
@@ -207,7 +219,7 @@ ${vidNameArr[5]}`
         console.error(err);
         if (songEmbed) {
         }
-        return message.say('An error occured, please try again.');
+        return;
       }
       if (response.first().content === 'cancel')
         return message.say({
@@ -250,7 +262,8 @@ ${vidNameArr[5]}`
         duration,
         thumbnail,
         voiceChannel
-      };
+      }; 
+      
       // // can be uncommented if you don't want to limit the queue
       // if (message.guild.musicData.queue.length > 200 {
       //   songEmbed.delete();
@@ -288,7 +301,7 @@ ${vidNameArr[5]}`
       if (songEmbed) {
       }
       return message.say(
-        ':warning: algo salió mal por favor intente nuevamente en unos minutos'
+        `\`${err}\``
       );
     }
   }
@@ -317,13 +330,13 @@ ${vidNameArr[5]}`
               .setDescription(
                 `[${queue[0].title}](${
                   queue[0].url
-                })\nBitrate: \`512kbps\`, Volume: \`${dispatcher.setVolume(
+                })\nBitrate: \`512kbps\`, Volume: \`${
                   message.guild.musicData.volume
-                )}\`\nDuration: \`${queue[0].duration}\``
+                }\`\nDuration: \`${queue[0].duration}\``
               )
               .setFooter(
                 `Requested by ${message.author.username}`,
-                `${message.author.avatarURL({ format: 'png', dynamic: true })}`
+                `${message.author.displayAvatarURL({ dynamic: true })}`
               );
             message.say(videoEmbed);
             message.guild.musicData.nowPlaying = queue[0];
