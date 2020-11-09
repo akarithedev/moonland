@@ -52,11 +52,10 @@ module.exports = class serverinfoCommand extends Command {
             }
         }) 
 
-  
    const embed = new MessageEmbed() 
    .addField("❯ Server Name", `${message.guild.name}`, true) 
    .addField("❯ Server ID", message.guild.id, true) 
-   .addField("❯ Owner", message.guild.owner.user.tag, true) 
+   .addField("❯ Owner", message.guild.owner, true) 
    .addField("❯ Region", region[message.guild.region], true) 
    .addField("❯ Verification Level", message.guild.verificationLevel, true) 
    .addField("❯ Member Count", `Total Members: [\`${message.guild.members.cache.size}\`]\nUser Count: [\`${message.guild.members.cache.filter(member => !member.user.bot).size}\`]\nBot Count: [\`${message.guild.members.cache.filter(member => member.user.bot).size}\`]`, true) 
@@ -82,7 +81,11 @@ module.exports = class serverinfoCommand extends Command {
       ]) 
    
    .setThumbnail(message.guild.iconURL({dynamic: true}), true) 
-   .setColor("#ff2025")
-   message.channel.send(embed)
+   .setColor("#ff2025") 
+   
+   const embed2 = new MessageEmbed() 
+   .setTitle("Command Maintenance")
+   .setDescription("This command is under maintenance")
+   message.channel.send(embed2)
    }
 };

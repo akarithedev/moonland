@@ -405,7 +405,6 @@ bot.on("guildCreate", guild => {
     .setAuthor("Guild Join")
     .setColor("GREEN")
     .addField("❯ Server Name", `${guild.name}`)
-    .addField("❯ Owner", `${guild.owner}`)
     .addField("❯ Member Count", `${guild.memberCount}`)
     .addField("❯ Verification Level", `${guild.verificationLevel}`)
     .setThumbnail(guild.iconURL())
